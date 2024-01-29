@@ -1,5 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Monoton&family=Quicksand:wght@500;700&display=swap");
 
+:root {
+  --arrow-icon: url(https://upload.wikimedia.org/wikipedia/commons/9/9d/Caret_down_font_awesome_whitevariation.svg);
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -44,6 +48,20 @@ h1 {
   align-items: center;
   justify-content: center;
   gap: 0.8rem;
+
+  & select {
+    appearance: none;
+    padding: 12px 3rem;
+    background: var(--arrow-icon) no-repeat right 0.5em center / 1.4em;
+    background-color: #ffebb3;
+    color: #5a3e2b;
+    font-family: inherit;
+    border: none;
+    border-radius: 10rem;
+    font-weight: 700;
+    font-size: 1.8rem;
+    cursor: pointer;
+  }
 }
 
 h3 {
