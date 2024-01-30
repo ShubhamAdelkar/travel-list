@@ -35,6 +35,7 @@ function Form() {
     // regex for ! accepting numbers
     const alphabeticRegex = /^[A-Za-z\s]+$/;
 
+    // non meaningful words array
     const nonMeaningfulWords = [
       "hello",
       "mad",
@@ -178,11 +179,10 @@ function Form() {
       "throughout",
       "along",
       "against",
-    ]; // non meaningful words array
+    ];
+    const cleanedDescription = description.trim(); // its constant
 
-    const cleanedDescription = description.trim();
-
-    // function to check non-meaningfull word
+    // function to include non-meaningfull words
     function isNonMeaningfulWord(word) {
       return nonMeaningfulWords.includes(word.toLowerCase());
     }
