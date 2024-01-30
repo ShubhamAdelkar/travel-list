@@ -1,4 +1,5 @@
 import { useState } from "react";
+import nonMeaningfulWords from "./nonMeanings";
 
 // Intial item list
 const initialItems = [
@@ -36,155 +37,31 @@ function Form() {
     const alphabeticRegex = /^[A-Za-z\s]+$/;
 
     // non meaningful words array
-    const nonMeaningfulWords = [
-      "hello",
-      "mad",
-      "idiot",
-      "hi",
-      "hii",
-      "justine",
-      "bye",
-      "goodbye",
-      "thanks",
-      "thank you",
-      "good",
-      "bad",
-      "ok",
-      "okay",
-      "fine",
-      "cool",
-      "awesome",
-      "no",
-      "yes",
-      "maybe",
-      "sure",
-      "yeah",
-      "yup",
-      "please",
-      "sorry",
-      "excuse me",
-      "pardon",
-      "alright",
-      "nice",
-      "great",
-      "wonderful",
-      "fantastic",
-      "amazing",
-      "beautiful",
-      "good morning",
-      "good afternoon",
-      "good evening",
-      "good night",
-      "how are you",
-      "what's up",
-      "see you",
-      "talk to you later",
-      "take care",
-      "have a nice day",
-      "best regards",
-      "sincerely",
-      "morning",
-      "afternoon",
-      "evening",
-      "night",
-      "day",
-      "week",
-      "month",
-      "year",
-      "today",
-      "tomorrow",
-      "yesterday",
-      "now",
-      "later",
-      "soon",
-      "forever",
-      "always",
-      "never",
-      "together",
-      "apart",
-      "here",
-      "there",
-      "everywhere",
-      "anywhere",
-      "nowhere",
-      "up",
-      "down",
-      "left",
-      "right",
-      "north",
-      "south",
-      "east",
-      "west",
-      "far",
-      "near",
-      "farther",
-      "nearer",
-      "farthest",
-      "nearest",
-      "away",
-      "back",
-      "forward",
-      "on",
-      "off",
-      "in",
-      "out",
-      "hello",
-      "Hello",
-      "over",
-      "under",
-      "above",
-      "below",
-      "through",
-      "across",
-      "between",
-      "among",
-      "within",
-      "without",
-      "beside",
-      "beyond",
-      "inside",
-      "outside",
-      "around",
-      "about",
-      "before",
-      "after",
-      "during",
-      "while",
-      "since",
-      "until",
-      "at",
-      "by",
-      "for",
-      "with",
-      "without",
-      "about",
-      "against",
-      "instead",
-      "besides",
-      "Shubham",
-      "shubham",
-      "Vipul",
-      "vipul",
-      "Renuka",
-      "renuka",
-      "Chinmay",
-      "chinmay",
-      "Miraya",
-      "miraya",
-      "alex",
-      "Alex",
-      "javascript",
-      "Javascript",
-      "girl",
-      "throughout",
-      "along",
-      "against",
-    ];
+
     const cleanedDescription = description.trim(); // its constant
 
     // function to include non-meaningfull words
     function isNonMeaningfulWord(word) {
-      return nonMeaningfulWords.includes(word.toLowerCase());
+      const cleanedWord = word.trim().toLowerCase();
+      const lowercaseWord = cleanedWord;
+      const uppercaseWord =
+        cleanedWord.charAt(0).toUpperCase() + cleanedWord.slice(1);
+      return (
+        nonMeaningfulWords.includes(lowercaseWord) ||
+        nonMeaningfulWords.includes(uppercaseWord)
+      );
+    }
+
+    // check for at least three characters
+    function isValidWordLength(word) {
+      return word.length >= 3;
+    }
+
+    // its function
+    if (!isValidWordLength(cleanedDescription)) {
+      return alert(
+        "Please include a valid travel item with at least 3 characters."
+      );
     }
 
     //checks for numbers
