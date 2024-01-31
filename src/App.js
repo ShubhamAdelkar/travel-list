@@ -43,7 +43,7 @@ function App() {
 
 // Header
 function Logo() {
-  return <h1>✈️Far Away👜</h1>;
+  return <h1>👜Far Away👜</h1>;
 }
 
 //  Form
@@ -194,18 +194,18 @@ function Stats({ items }) {
     NumItems === 1
       ? `item in your list${NumPacked === 0 ? "." : ","}`
       : `items in your list${NumPacked === 0 ? "." : ","}`;
-  const packedText =
-    NumPacked === 0 ? "" : ` you packed ${NumPacked} (${NumPercentage}%).`;
+  const packedText = NumPacked === 0 ? "" : ` you packed ${NumPercentage}%.`;
 
   return (
     <footer className="stats">
-      <em>
+      <p>
         {NumItems === 0
           ? "No items in your list.🛒"
           : NumPercentage === 100
           ? "You got everything, Ready to go! 👜"
           : `You have ${NumItems} ${itemsText}${packedText}`}
-      </em>
+      </p>
+      <p className="credits">by Shubham</p>
     </footer>
   );
 }
