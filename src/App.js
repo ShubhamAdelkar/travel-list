@@ -62,6 +62,11 @@ function Form({ onAddItems }) {
       return word.length >= 3;
     }
 
+    // Matches repeated characters 3 times or more
+    function hasRepeatedCharacters(word) {
+      const repeatedCharactersRegex = /(.)\1{2,}/;
+      return repeatedCharactersRegex.test(word);
+    }
     // its function
     if (!isValidWordLength(cleanedDescription)) {
       return alert(
@@ -82,10 +87,17 @@ function Form({ onAddItems }) {
     setDescription(""); // set to initial state
     setQuantity(1); // set to initial state
 
+    // Check for repeated characters
+    if (hasRepeatedCharacters(cleanedDescription)) {
+      return alert(
+        `Please avoid using repeated characters like ${newItem.description}, vvvv, etc.`
+      );
+    }
+
     // checks for non-meaningful words from its array
     if (!cleanedDescription || isNonMeaningfulWord(cleanedDescription)) {
       return alert(
-        `Seriously, "${newItem.description}" ? Please include a valid travel item.`
+        `Really, "${newItem.description}"? Please include a valid travel item.`
       );
     }
     onAddItems(newItem);
@@ -97,6 +109,7 @@ function Form({ onAddItems }) {
       <select
         value={quantity}
         onChange={(e) => setQuantity(Number(e.target.value))}
+        title="Select quantity of items"
       >
         {Array.from({ length: 20 }, (_, i) => i + 1).map((num) => (
           <option value={num} key={num}>
@@ -109,6 +122,7 @@ function Form({ onAddItems }) {
         placeholder="item..."
         value={description}
         onChange={(e) => setDescription(e.target.value)}
+        title="Enter a valid travel item (at least 3 characters)"
       />
       <button>Add</button>
     </form>
