@@ -81,14 +81,14 @@ function Form({ onAddItems }) {
     const newItem = { description, quantity, packed: false, id: Date.now() };
     setDescription(""); // set to initial state
     setQuantity(1); // set to initial state
-    
+
     // checks for non-meaningful words from its array
     if (!cleanedDescription || isNonMeaningfulWord(cleanedDescription)) {
       return alert(
         `Seriously, "${newItem.description}" ? Please include a valid travel item.`
-        );
-      }
-      onAddItems(newItem);
+      );
+    }
+    onAddItems(newItem);
   }
 
   return (
