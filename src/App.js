@@ -1,25 +1,26 @@
 import { useState } from "react";
 import nonMeaningfulWords from "./nonMeanings";
 
-// Intial item list
-const initialItems = [
-  { id: 1, description: " Passports", quantity: 2, packed: false },
-  { id: 2, description: " Socks", quantity: 12, packed: false },
-  { id: 3, description: " Charger", quantity: 1, packed: true },
-];
-
 // Main App
 function App() {
   const [items, setItems] = useState([]);
+
+  // adding an items
   function handleItems(item) {
     setItems((items) => [...items, item]);
+  }
+
+  //deleting items
+  function handleDeleteItem(id) {
+    setItems((items) => items.filter((item) => item.id !== id));
   }
   return (
     <div className="app">
       <Logo />
+      {/* props */}
       <Form onAddItems={handleItems} />
-      <Packinglist items={items} />
-      <Stats />
+      {/* props */}
+      <Packinglist items={items} onDeleteItems={handleDeleteItem} /> <Stats />
     </div>
   );
 }
@@ -78,16 +79,16 @@ function Form({ onAddItems }) {
 
     // adding an item
     const newItem = { description, quantity, packed: false, id: Date.now() };
-    onAddItems(newItem);
     setDescription(""); // set to initial state
     setQuantity(1); // set to initial state
-
+    
     // checks for non-meaningful words from its array
     if (!cleanedDescription || isNonMeaningfulWord(cleanedDescription)) {
       return alert(
         `Seriously, "${newItem.description}" ? Please include a valid travel item.`
-      );
-    }
+        );
+      }
+      onAddItems(newItem);
   }
 
   return (
@@ -115,12 +116,12 @@ function Form({ onAddItems }) {
 }
 
 // Current List
-function Packinglist({ items }) {
+function Packinglist({ items, onDeleteItems }) {
   return (
     <div className="list">
       <ul>
         {items.map((item) => (
-          <Item item={item} key={item.id} />
+          <Item item={item} onDeleteItems={onDeleteItems} key={item.id} /> //passing function props from parent
         ))}
       </ul>
     </div>
@@ -128,14 +129,14 @@ function Packinglist({ items }) {
 }
 
 // List Item
-function Item({ item }) {
+function Item({ item, onDeleteItems }) {
   return (
     <li>
       <span style={item.packed ? { textDecoration: "line-through" } : {}}>
         <span className="quantity">{item.quantity}</span>
         {item.description}
       </span>
-      <button>❌</button>
+      <button onClick={() => onDeleteItems(item.id)}>❌</button>
     </li>
   );
 }
