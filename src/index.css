@@ -208,7 +208,7 @@ input[type="checkbox"] {
 
   .list {
     padding: 2rem 0;
-    font-size: 16px;
+    font-size: 17px;
 
     .actions button,
     .list select {
@@ -230,6 +230,7 @@ input[type="checkbox"] {
       width: 16px;
       height: 16px;
       line-height: 16px;
+      padding: 6px;
     }
 
     input[type="checkbox"] {
