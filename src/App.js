@@ -135,7 +135,7 @@ function Form({ onAddItems }) {
       </select>
       <input
         type="text"
-        placeholder="item..."
+        placeholder="Type your item"
         value={description}
         onChange={(e) => setDescription(e.target.value)}
         title="Enter a valid travel item (at least 3 characters)"
