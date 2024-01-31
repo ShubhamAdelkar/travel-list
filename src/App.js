@@ -4,6 +4,7 @@ import nonMeaningfulWords from "./nonMeanings";
 // Main App
 function App() {
   const [items, setItems] = useState([]);
+  const NumItems = items.length;
 
   // adding an items
   function handleItems(item) {
@@ -14,13 +15,28 @@ function App() {
   function handleDeleteItem(id) {
     setItems((items) => items.filter((item) => item.id !== id));
   }
+
+  // updating an item
+  function handleToggleItems(id) {
+    setItems((items) =>
+      items.map((item) =>
+        item.id === id ? { ...item, packed: !item.packed } : item
+      )
+    );
+  }
+
   return (
     <div className="app">
       <Logo />
       {/* props */}
       <Form onAddItems={handleItems} />
       {/* props */}
-      <Packinglist items={items} onDeleteItems={handleDeleteItem} /> <Stats />
+      <Packinglist
+        items={items}
+        onDeleteItems={handleDeleteItem}
+        onToggleItems={handleToggleItems}
+      />{" "}
+      <Stats items={items} />
     </div>
   );
 }
@@ -130,12 +146,17 @@ function Form({ onAddItems }) {
 }
 
 // Current List
-function Packinglist({ items, onDeleteItems }) {
+function Packinglist({ items, onDeleteItems, onToggleItems }) {
   return (
     <div className="list">
       <ul>
         {items.map((item) => (
-          <Item item={item} onDeleteItems={onDeleteItems} key={item.id} /> //passing function props from parent
+          <Item
+            item={item}
+            onDeleteItems={onDeleteItems}
+            onToggleItems={onToggleItems}
+            key={item.id}
+          /> //passing function props from parent
         ))}
       </ul>
     </div>
@@ -143,10 +164,14 @@ function Packinglist({ items, onDeleteItems }) {
 }
 
 // List Item
-function Item({ item, onDeleteItems }) {
+function Item({ item, onDeleteItems, onToggleItems }) {
   return (
     <li>
-      <input type="checkbox" value={item.packed} />
+      <input
+        type="checkbox"
+        onChange={() => onToggleItems(item.id)}
+        value={item.packed}
+      />
       <span style={item.packed ? { textDecoration: "line-through" } : {}}>
         <span className="quantity">{item.quantity}</span>
         {item.description}
@@ -157,10 +182,19 @@ function Item({ item, onDeleteItems }) {
 }
 
 // Footer
-function Stats() {
+function Stats({ items }) {
+  const NumItems = items.length;
+  const NumPacked = items.filter((item) => item.packed).length;
+  const NumPercentage =
+    NumItems === 0 ? 0 : Math.round((NumPacked / NumItems) * 100);
+
   return (
     <footer className="stats">
-      <em>You have X items in your list, you packed X</em>
+      <em>
+        {NumPercentage === 100
+          ? "You got everything, Ready to go!👜"
+          : `You have ${NumItems} items in your list, you packed ${NumPacked} (${NumPercentage}%).`}
+      </em>
     </footer>
   );
 }
