@@ -170,7 +170,7 @@ function Item({ item, onDeleteItems, onToggleItems }) {
       <input
         type="checkbox"
         onChange={() => onToggleItems(item.id)}
-        value={item.packed}
+        checked={item.packed}
       />
       <span style={item.packed ? { textDecoration: "line-through" } : {}}>
         <span className="quantity">{item.quantity}</span>
@@ -183,8 +183,11 @@ function Item({ item, onDeleteItems, onToggleItems }) {
 
 // Footer
 function Stats({ items }) {
-  const NumItems = items.length;
-  const NumPacked = items.filter((item) => item.packed).length;
+  const NumItems = items.reduce((total, item) => total + item.quantity, 0);
+  const NumPacked = items.reduce(
+    (total, item) => total + (item.packed ? item.quantity : 0),
+    0
+  );
   const NumPercentage =
     NumItems === 0 ? 0 : Math.round((NumPacked / NumItems) * 100);
   const itemsText =
