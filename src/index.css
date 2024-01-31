@@ -92,7 +92,7 @@ input {
   justify-content: space-between;
   flex-direction: column;
   gap: 3.2rem;
-  font-size: 14px;
+  font-size: 16px;
   align-items: center;
 }
 
@@ -127,7 +127,8 @@ input {
   display: inline-block;
   width: 24px;
   height: 24px;
-  padding: 6px;
+  padding: 2px;
+  margin-right: 6px;
   box-sizing: content-box;
   border-radius: 50%;
   background-color: green;
