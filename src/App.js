@@ -187,13 +187,21 @@ function Stats({ items }) {
   const NumPacked = items.filter((item) => item.packed).length;
   const NumPercentage =
     NumItems === 0 ? 0 : Math.round((NumPacked / NumItems) * 100);
+  const itemsText =
+    NumItems === 1
+      ? `item in your list${NumPacked === 0 ? "." : ","}`
+      : `items in your list${NumPacked === 0 ? "." : ","}`;
+  const packedText =
+    NumPacked === 0 ? "" : ` you packed ${NumPacked} (${NumPercentage}%).`;
 
   return (
     <footer className="stats">
       <em>
-        {NumPercentage === 100
-          ? "You got everything, Ready to go!👜"
-          : `You have ${NumItems} items in your list, you packed ${NumPacked} (${NumPercentage}%).`}
+        {NumItems === 0
+          ? "No items in your list.🛒"
+          : NumPercentage === 100
+          ? "You got everything, Ready to go! 👜"
+          : `You have ${NumItems} ${itemsText}${packedText}`}
       </em>
     </footer>
   );
