@@ -18,6 +18,8 @@ const nonMeaningfulWords = [
   "Listen",
   "Eat",
   "Sleep",
+  "hand",
+  "eye",
   "Study",
   "Work",
   "Play",
