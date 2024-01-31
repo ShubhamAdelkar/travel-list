@@ -87,7 +87,8 @@ input {
 
 .add-form button {
   text-transform: uppercase;
-  background-color: #76c7ad;
+  color: #fff;
+  background-color: #0F9D58;
 }
 
 .list {
@@ -133,19 +134,19 @@ input {
   display: inline-block;
   width: 24px;
   height: 24px;
-  padding: 2px;
+  padding: 4px;
   margin-right: 6px;
   box-sizing: content-box;
   border-radius: 50%;
-  background-color: green;
-  color: white;
+  background-color: #0F9D58;
   text-align: center;
   line-height: 24px;
 }
 
 input[type="checkbox"] {
-  height: 2rem;
-  width: 2rem;
+  height: 2.4rem;
+  width: 2.4rem;
+  margin-right: 2px;
   accent-color: #DB4437;
 }
 
@@ -245,8 +246,8 @@ input[type="checkbox"] {
     }
 
     input[type="checkbox"] {
-      height: 1.6rem;
-      width: 1.6rem;
+      height: 2.2rem;
+      width: 2.2rem;
     }
 
     .list li button {
